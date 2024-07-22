@@ -12,6 +12,9 @@ const config: Config = {
       fontFamily: {
         poppins: ["var(--font-poppins)", ...fontFamily.sans],
       },
+      colors: {
+        primary: "#8338ec",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
