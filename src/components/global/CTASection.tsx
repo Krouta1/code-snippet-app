@@ -15,7 +15,7 @@ const CTASection = (props: CTASectionProps) => {
         code and more time writing it.
       </p>
       <button
-        className="border-primary block rounded-md border px-9 py-3 text-sm font-medium text-white transition focus:outline-none"
+        className="block rounded-md border border-primary px-9 py-3 text-sm font-medium text-slate-900 transition focus:outline-none"
         type="button"
       >
         {`Let's Get Started`}

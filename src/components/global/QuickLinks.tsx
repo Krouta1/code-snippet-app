@@ -1,3 +1,5 @@
+"use client";
+import { useGlobalContext } from "@/context/ContextApi";
 import {
   BorderAll,
   DeleteOutlineOutlined,
@@ -6,6 +8,10 @@ import {
 import React from "react";
 
 const QuickLinks = () => {
+  const {
+    sidebarMenuObject: { sidebarMenu },
+  } = useGlobalContext();
+
   return (
     <div className="mt-20 text-sm">
       <div className="font-bold text-slate-400">Quick Links</div>
