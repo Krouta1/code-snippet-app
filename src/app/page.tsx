@@ -1,5 +1,5 @@
-import Navbar from "./components/global/Navbar";
-import CTASection from "./components/global/CTASection";
+import CTASection from "@/components/global/CTASection";
+import Navbar from "@/components/global/Navbar";
 
 export default function Home() {
   return (
