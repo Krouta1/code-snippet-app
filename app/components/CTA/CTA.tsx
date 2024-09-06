@@ -2,10 +2,10 @@ import React from "react";
 
 const CTA = () => {
   return (
-    <div className="mx-16 mt-[120px] flex flex-col items-center gap-6">
+    <section className="mx-16 mt-[120px] flex flex-col items-center gap-6">
       <h2 className="text-center text-2xl font-bold">
         Organize Your Code{" "}
-        <span className="decoration-primary underline decoration-dashed underline-offset-2">
+        <span className="underline decoration-primary decoration-dashed underline-offset-2">
           Snippets
         </span>
       </h2>
@@ -16,11 +16,11 @@ const CTA = () => {
       </p>
       <button
         type="button"
-        className="bg-primary block cursor-pointer rounded-md px-9 py-3 text-sm font-medium text-white transition-colors focus:outline-none"
+        className="block cursor-pointer rounded-md bg-primary px-9 py-3 text-center text-sm font-medium text-white transition-colors focus:outline-none"
       >
         {`Let's Get Started`}
       </button>
-    </div>
+    </section>
   );
 };
 
