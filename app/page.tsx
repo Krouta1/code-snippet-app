@@ -1,3 +1,9 @@
+import Navbar from "./components/Navbar/Navbar";
+
 export default function Home() {
-  return <div className='poppins'></div>;
+  return (
+    <div className="poppins">
+      <Navbar />
+    </div>
+  );
 }
