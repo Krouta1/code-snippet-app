@@ -1,7 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
-import connect from "@/app/lib/connect";
+import connectDB from "@/app/lib/connect";
 import User from "@/app/Models/UserSchema";
 
 export async function POST(req: Request) {
@@ -63,7 +63,7 @@ export async function POST(req: Request) {
     };
 
     try {
-      await connect();
+      await connectDB();
       await User.create(newUser);
     } catch (error) {
       throw new Error("Error creating user");
