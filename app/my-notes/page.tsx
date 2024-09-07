@@ -1,5 +1,11 @@
+import Sidebar from "../components/Sidebar/Sidebar";
+
 const MyNotesPage = async () => {
-  return <div>MyNotesPage</div>;
+  return (
+    <div>
+      <Sidebar />
+    </div>
+  );
 };
 
 export default MyNotesPage;
