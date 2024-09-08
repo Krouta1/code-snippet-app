@@ -19,7 +19,9 @@ const DarkMode = () => {
   }
 
   return (
-    <div className="flex h-[36px] w-[74px] items-center gap-2 rounded-3xl bg-slate-100 pl-[5px]">
+    <div
+      className={`flex h-[36px] w-[74px] items-center gap-2 rounded-3xl ${darkMode[1].isSelected ? "bg-slate-600" : "bg-slate-100"} pl-[5px]`}
+    >
       {darkMode.map((item) => (
         <div
           key={item.id}
@@ -27,7 +29,7 @@ const DarkMode = () => {
             item.isSelected
               ? "bg-purple-600 text-white"
               : "bg-slate-100 text-purple-600"
-          }`}
+          } `}
           onClick={() => handleDarkMode(item.id)}
         >
           {item.icon}
