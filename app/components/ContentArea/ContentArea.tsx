@@ -2,6 +2,7 @@
 import React from "react";
 import Topbar from "../Topbar/Topbar";
 import { useGlobalContext } from "@/ContextApi";
+import SwiperSelection from "./SwiperSelection";
 
 const ContentArea = () => {
   const {
@@ -10,9 +11,10 @@ const ContentArea = () => {
 
   return (
     <div
-      className={`w-full bg-slate-100 p-5 ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"}`}
+      className={`h-screen w-full bg-slate-100 p-5 ${darkMode[1].isSelected ? "bg-slate-700" : "bg-slate-100"}`}
     >
       <Topbar />
+      <SwiperSelection />
     </div>
   );
 };
