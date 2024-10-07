@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, ReactNode } from "react";
+import React, { createContext, ReactNode, useEffect } from "react";
 import {
   BorderAll,
   DarkMode,
@@ -8,6 +8,7 @@ import {
   LightMode,
   Logout,
 } from "@mui/icons-material";
+import { DarkModeType, SideBarMenu, SingleNoteType } from "./app/types/Types";
 
 interface GlobalContextType {
   sideBarMenuObject: {
@@ -22,19 +23,25 @@ interface GlobalContextType {
     openSidebar: boolean;
     setOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
   };
-}
+  openContentNoteObject: {
+    openContentNote: boolean;
+    setOpenContentNote: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  isMobileObject: {
+    isMobile: boolean;
+    setIsMobile: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  allNotesObject: {
+    allNotes: SingleNoteType[];
+    setAllNotes: React.Dispatch<React.SetStateAction<SingleNoteType[]>>;
+  };
 
-interface SideBarMenu {
-  id: number;
-  name: string;
-  isSelected: boolean;
-  icons: ReactNode;
-}
-
-interface DarkModeType {
-  id: number;
-  icon: ReactNode;
-  isSelected: boolean;
+  selectedNoteObject: {
+    selectedNote: SingleNoteType | null;
+    setSelectedNote: React.Dispatch<
+      React.SetStateAction<SingleNoteType | null>
+    >;
+  };
 }
 
 const ContextProvider = createContext<GlobalContextType | undefined>({
@@ -49,6 +56,22 @@ const ContextProvider = createContext<GlobalContextType | undefined>({
   openSidebarObject: {
     openSidebar: false,
     setOpenSidebar: () => {},
+  },
+  openContentNoteObject: {
+    openContentNote: false,
+    setOpenContentNote: () => {},
+  },
+  isMobileObject: {
+    isMobile: false,
+    setIsMobile: () => {},
+  },
+  allNotesObject: {
+    allNotes: [],
+    setAllNotes: () => {},
+  },
+  selectedNoteObject: {
+    selectedNote: null,
+    setSelectedNote: () => {},
   },
 });
 
@@ -99,12 +122,39 @@ export default function GlobalContextProvider({
 
   const [openSidebar, setOpenSidebar] = React.useState<boolean>(false);
 
+  const [openContentNote, setOpenContentNote] = React.useState<boolean>(false);
+  const [isMobile, setIsMobile] = React.useState<boolean>(false);
+  const [allNotes, setAllNotes] = React.useState<SingleNoteType[]>([]);
+  const [selectedNote, setSelectedNote] = React.useState<SingleNoteType | null>(
+    null,
+  );
+
+  const handleResize = () => {
+    if (window.innerWidth <= 640) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <ContextProvider.Provider
       value={{
         sideBarMenuObject: { sideBarMenu, setSideBarMenu },
         darkModeObject: { darkMode, setDarkMode },
         openSidebarObject: { openSidebar, setOpenSidebar },
+        openContentNoteObject: { openContentNote, setOpenContentNote },
+        isMobileObject: { isMobile, setIsMobile },
+        allNotesObject: { allNotes, setAllNotes },
+        selectedNoteObject: { selectedNote, setSelectedNote },
       }}
     >
       {children}

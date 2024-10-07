@@ -1,8 +1,13 @@
-import "swiper/modules";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+// import required modules
 import { FreeMode } from "swiper/modules";
 import { useGlobalContext } from "@/ContextApi";
+import { AddOutlined } from "@mui/icons-material";
 
 export default function SwiperSelection() {
   const {
@@ -11,29 +16,37 @@ export default function SwiperSelection() {
 
   return (
     <div
-      className={`flex gap-5 rounded-lg p-3 ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
+      className={`flex justify-start gap-5 rounded-lg p-3 ${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"}`}
     >
-      <div className="w-[1112px] overflow-x-auto">
+      <div className="w-11/12 overflow-x-auto">
         <Swiper
           slidesPerView={"auto"}
           spaceBetween={10}
           freeMode={true}
+          pagination={{
+            clickable: true,
+          }}
           modules={[FreeMode]}
           className="mySwiper"
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          <SwiperSlide className="w-20 rounded-md bg-primary text-white">
+            All
+          </SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
+          <SwiperSlide>react exercise</SwiperSlide>
         </Swiper>
       </div>
-      <button className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700">
-        ?
+      <button className="flex items-center rounded-md bg-primary p-1 px-3 text-white">
+        <AddOutlined sx={{ fontSize: 18 }} />
+        <span>Tag</span>
       </button>
     </div>
   );
