@@ -2,7 +2,8 @@
 import React from "react";
 import Search from "@mui/icons-material/Search";
 import { useGlobalContext } from "@/ContextApi";
-
+import { SingleNoteType } from "@/app/types/Types";
+import { v4 as uuidv4 } from "uuid";
 const SearchBar = () => {
   const {
     darkModeObject: { darkMode },
@@ -24,8 +25,34 @@ const SearchBar = () => {
 };
 
 function AddSnippetButton() {
+  const {
+    openContentNoteObject: { setOpenContentNote },
+    selectedNoteObject: { setSelectedNote },
+    // allNotesObject: { allNotes, setAllNotes },
+    isNewNoteObject: { setIsNewNote },
+  } = useGlobalContext();
+
+  function openTheContentNote() {
+    const newSingleNote: SingleNoteType = {
+      id: uuidv4(),
+      title: "",
+      description: "",
+      isFavorite: false,
+      tags: [],
+      createdAt: new Date().toISOString(),
+      code: "",
+      language: "",
+    };
+    setIsNewNote(true);
+    setSelectedNote(newSingleNote);
+    setOpenContentNote(true);
+  }
+
   return (
-    <div className="absolute right-[6px] top-[5px] flex cursor-pointer select-none items-center gap-2 rounded-3xl bg-purple-600 p-1 px-3 text-[13px] text-white">
+    <div
+      className="absolute right-[6px] top-[5px] flex cursor-pointer select-none items-center gap-2 rounded-3xl bg-purple-600 p-1 px-3 text-[13px] text-white"
+      onClick={openTheContentNote}
+    >
       <div className="font-bold">+</div>
       <div className="max-md:hidden">Snippet</div>
     </div>

@@ -20,14 +20,13 @@ const SingleNote = ({ note }: { note: SingleNoteType }) => {
     openContentNoteObject: { openContentNote },
   } = useGlobalContext();
 
-  const { title, isFavorite, tags, description, code, language, createdAt } =
-    note;
+  const { tags, description, code, language, createdAt } = note;
 
   return (
     <div
       className={`${darkMode[1].isSelected ? "bg-slate-800 text-white" : "bg-white"} ${openContentNote ? "w-full" : "w-[360px]"} rounded-md px-2 py-4 shadow-md max-sm:w-full`}
     >
-      <NoteHeader title={title} isFavorite={isFavorite} />
+      <NoteHeader note={note} />
       <NoteDate date={createdAt} />
       <NoteTags tags={tags} />
       <NoteDescription description={description} />
@@ -37,23 +36,21 @@ const SingleNote = ({ note }: { note: SingleNoteType }) => {
   );
 };
 
-function NoteHeader({
-  title,
-  isFavorite,
-}: {
-  title: string;
-  isFavorite: boolean;
-}) {
+function NoteHeader({ note }: { note: SingleNoteType }) {
   const {
     openContentNoteObject: { setOpenContentNote },
+    selectedNoteObject: { setSelectedNote },
   } = useGlobalContext();
 
   return (
     <div
       className="mx-4 flex cursor-pointer justify-between"
-      onClick={() => setOpenContentNote((prev) => !prev)}
+      onClick={() => {
+        setOpenContentNote((prev) => !prev);
+        setSelectedNote(note);
+      }}
     >
-      <span className="w-[87%] text-lg font-bold">{title}</span>
+      <span className="w-[87%] text-lg font-bold">{note.title}</span>
       <FavoriteBorderOutlined className="cursor-pointer text-slate-400" />
     </div>
   );

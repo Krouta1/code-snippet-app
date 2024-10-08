@@ -10,6 +10,59 @@ import {
 } from "@mui/icons-material";
 import { DarkModeType, SideBarMenu, SingleNoteType } from "./app/types/Types";
 
+const testNotes: SingleNoteType[] = [
+  {
+    id: "1",
+    title: "First Note",
+    isFavorite: true,
+    tags: ["tag1", "tag2"],
+    description: "This is the first note description.",
+    code: "console.log('Hello, world!');",
+    language: "javascript",
+    createdAt: "2023-10-01T10:00:00Z",
+  },
+  {
+    id: "2",
+    title: "Second Note",
+    isFavorite: false,
+    tags: ["tag3"],
+    description: "This is the second note description.",
+    code: "print('Hello, world!')",
+    language: "python",
+    createdAt: "2023-10-02T11:00:00Z",
+  },
+  {
+    id: "3",
+    title: "Third Note",
+    isFavorite: true,
+    tags: ["tag4", "tag5", "tag6"],
+    description: "This is the third note description.",
+    code: "<h1>Hello, world!</h1>",
+    language: "html",
+    createdAt: "2023-10-03T12:00:00Z",
+  },
+  {
+    id: "4",
+    title: "Fourth Note",
+    isFavorite: false,
+    tags: ["tag7"],
+    description: "This is the fourth note description.",
+    code: "SELECT * FROM users;",
+    language: "sql",
+    createdAt: "2023-10-04T13:00:00Z",
+  },
+  {
+    id: " 5",
+    title: "Fifth Note",
+    isFavorite: true,
+    tags: ["tag8", "tag9"],
+    description: "This is the fifth note description.",
+    code: "def hello_world():\n    print('Hello, world!')",
+    language: "python",
+    createdAt: "2023-10-05T14:00:00Z",
+  },
+];
+
 interface GlobalContextType {
   sideBarMenuObject: {
     sideBarMenu: SideBarMenu[];
@@ -42,6 +95,11 @@ interface GlobalContextType {
       React.SetStateAction<SingleNoteType | null>
     >;
   };
+
+  isNewNoteObject: {
+    isNewNote: boolean;
+    setIsNewNote: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 }
 
 const ContextProvider = createContext<GlobalContextType | undefined>({
@@ -72,6 +130,10 @@ const ContextProvider = createContext<GlobalContextType | undefined>({
   selectedNoteObject: {
     selectedNote: null,
     setSelectedNote: () => {},
+  },
+  isNewNoteObject: {
+    isNewNote: false,
+    setIsNewNote: () => {},
   },
 });
 
@@ -124,10 +186,11 @@ export default function GlobalContextProvider({
 
   const [openContentNote, setOpenContentNote] = React.useState<boolean>(false);
   const [isMobile, setIsMobile] = React.useState<boolean>(false);
-  const [allNotes, setAllNotes] = React.useState<SingleNoteType[]>([]);
+  const [allNotes, setAllNotes] = React.useState<SingleNoteType[]>(testNotes);
   const [selectedNote, setSelectedNote] = React.useState<SingleNoteType | null>(
     null,
   );
+  const [isNewNoteObject, setIsNewNoteObject] = React.useState<boolean>(false);
 
   const handleResize = () => {
     if (window.innerWidth <= 640) {
@@ -155,6 +218,10 @@ export default function GlobalContextProvider({
         isMobileObject: { isMobile, setIsMobile },
         allNotesObject: { allNotes, setAllNotes },
         selectedNoteObject: { selectedNote, setSelectedNote },
+        isNewNoteObject: {
+          isNewNote: isNewNoteObject,
+          setIsNewNote: setIsNewNoteObject,
+        },
       }}
     >
       {children}

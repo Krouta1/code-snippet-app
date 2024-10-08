@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface SingleNoteType {
-  id: number;
+  id: string;
   title: string;
   isFavorite: boolean;
   tags: string[];
